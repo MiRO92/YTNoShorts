@@ -1,0 +1,11 @@
+Package: com.miro.ytnoshorts
+Name: YTNoShorts
+Depends: firmware (>=12.0), mobilesubstrate
+Version: 1.0.1
+Depiction: https://miro92.com/repo/depictions/?p=com.miro.ytnoshorts
+Description: Removes Shorts from the YouTube app.
+Architecture: iphoneos-arm
+Maintainer: MiRO <tweaks_support@miro92.com>
+Author: MiRO <tweaks_support@miro92.com>
+Section: Tweaks
+Tag: purpose::extension, compatible_min::ios12, compatible_max::ios14

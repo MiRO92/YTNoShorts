@@ -1,0 +1,12 @@
+._*
+*.deb
+.debmake
+_
+obj
+.theos
+.DS_Store
+*.xcworkspace/*
+*.xcworkspace
+run_theos.sh
+run_theos_simulator.sh
+Release_to_Public_Repo_Shortcut.command
