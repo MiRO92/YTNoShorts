@@ -4,11 +4,17 @@
 #pragma mark - Hooks
 %hook YTAsyncCollectionView
 - (id)cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    _ASCollectionViewCell *cell = %orig;
-    if ([cell respondsToSelector:@selector(node)]) {
-        if ([[[cell node] accessibilityIdentifier] isEqualToString:@"eml.shorts-shelf"]) {
-            [self removeShortsCellAtIndexPath:indexPath];
+    UICollectionViewCell *cell = %orig;
+
+    if ([cell isKindOfClass:NSClassFromString(@"_ASCollectionViewCell")]) {
+        _ASCollectionViewCell *cell = %orig;
+        if ([cell respondsToSelector:@selector(node)]) {
+            if ([[[cell node] accessibilityIdentifier] isEqualToString:@"eml.shorts-shelf"]) {
+                [self removeShortsCellAtIndexPath:indexPath];
+            }
         }
+    } else if ([cell isKindOfClass:NSClassFromString(@"YTReelShelfCell")]) {
+        [self removeShortsCellAtIndexPath:indexPath];
     }
     return %orig;
 }
