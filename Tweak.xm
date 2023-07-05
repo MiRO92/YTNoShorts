@@ -6,23 +6,24 @@
 - (id)cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = %orig;
 
-    if ([cell isKindOfClass:NSClassFromString(@"_ASCollectionViewCell")]) {
+    if ([cell isKindOfClass:objc_lookUpClass("_ASCollectionViewCell")]) {
         _ASCollectionViewCell *cell = %orig;
         if ([cell respondsToSelector:@selector(node)]) {
-            if ([[[cell node] accessibilityIdentifier] isEqualToString:@"eml.shorts-shelf"]) {
-                [self removeShortsCellAtIndexPath:indexPath];
+            NSString *idToRemove = [[cell node] accessibilityIdentifier];
+            if ([idToRemove isEqualToString:@"eml.shorts-grid"] || [idToRemove isEqualToString:@"eml.shorts-shelf"]) {
+                [self removeCellsAtIndexPath:indexPath];
             }
         }
-    } else if ([cell isKindOfClass:NSClassFromString(@"YTReelShelfCell")]) {
-        [self removeShortsCellAtIndexPath:indexPath];
+    } else if ([cell isKindOfClass:objc_lookUpClass("YTReelShelfCell")]) {
+        [self removeCellsAtIndexPath:indexPath];
     }
     return %orig;
 }
 
 %new
-- (void)removeShortsCellAtIndexPath:(NSIndexPath *)indexPath {
+- (void)removeCellsAtIndexPath:(NSIndexPath *)indexPath {
 //    [self performBatchUpdates:^{
-        [self deleteItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
+        [self deleteItemsAtIndexPaths:@[indexPath]];
 //    } completion:nil];
 }
 %end
